@@ -1,42 +1,54 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { motion } from "framer-motion"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Heart, Leaf, Shield, Sparkles } from "lucide-react"
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Heart, Leaf, Shield, Sparkles } from "lucide-react";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   {
     icon: Heart,
     title: "Comfortable Fit",
-    description: "Soft, breathable materials that move with your body for all-day comfort and confidence.",
-    color: "text-accent",
+    description:
+      "Soft, breathable materials that move with your body for all-day comfort and confidence.",
+    color: "text-rose-500",
+    bgColor: "bg-rose-100",
+    gradient: "from-rose-400 to-pink-500",
   },
   {
     icon: Leaf,
     title: "Eco-Friendly",
-    description: "Made with 100% organic cotton and biodegradable materials to protect you and the planet.",
-    color: "text-primary",
+    description:
+      "Made with 100% organic cotton and biodegradable materials to protect you and the planet.",
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-100",
+    gradient: "from-emerald-400 to-teal-500",
   },
   {
     icon: Shield,
     title: "Long-Lasting Protection",
-    description: "Advanced absorption technology keeps you dry and protected for up to 24 hours.",
-    color: "text-accent",
+    description:
+      "Advanced absorption technology keeps you dry and protected for up to 24 hours.",
+    color: "text-blue-500",
+    bgColor: "bg-blue-100",
+    gradient: "from-blue-400 to-cyan-500",
   },
   {
     icon: Sparkles,
     title: "Dermatologically Tested",
-    description: "Hypoallergenic and pH-balanced formula, gentle on sensitive skin and clinically tested.",
-    color: "text-primary",
+    description:
+      "Hypoallergenic and pH-balanced formula, gentle on sensitive skin and clinically tested.",
+    color: "text-purple-500",
+    bgColor: "bg-purple-100",
+    gradient: "from-purple-400 to-pink-500",
   },
-]
+];
 
 export default function FeaturesSection() {
-  const sectionRef = useRef<HTMLElement>(null)
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -50,50 +62,111 @@ export default function FeaturesSection() {
         stagger: 0.2,
         duration: 0.8,
         ease: "power3.out",
-      })
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white">
+    <section
+      ref={sectionRef}
+      id="features"
+      className="relative lg:py-20 py-10 bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100"
+      aria-labelledby="features-heading"
+      role="region"
+      itemScope
+      itemType="https://schema.org/ItemList"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <header
+          className="text-center mb-16"
+          itemScope
+          itemType="https://schema.org/Organization"
+        >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-2 bg-surface rounded-full text-primary font-medium text-sm mb-4"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-200 to-rose-200 rounded-full text-rose-600 font-medium text-sm mb-4 shadow-sm"
           >
-            Our Promise
+            <Sparkles size={16} aria-hidden="true" />
+            <span>Our Promise to You</span>
           </motion.div>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Why Choose Gift Sanitary Napkins?
+          <h2
+            id="features-heading"
+            className="font-serif text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4 text-balance"
+            itemProp="slogan"
+          >
+            Why Choose <span itemProp="brand">Gift Sanitary Napkins</span>?
           </h2>
-          <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
-            We combine comfort, sustainability, and protection to give you the care you deserve.
+          <p
+            className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed bg-white/50 rounded-2xl p-6 shadow-sm"
+            itemProp="description"
+          >
+            We combine comfort, sustainability, and protection to give you the
+            care you truly deserve — because every woman deserves to feel
+            beautiful and confident.
           </p>
-        </div>
+        </header>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <article
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          role="list"
+          itemProp="itemListElement"
+        >
           {features.map((feature, index) => (
-            <motion.div key={index} whileHover={{ y: -8 }} className="feature-card group">
-              <div className="bg-surface rounded-2xl p-8 h-full border-2 border-transparent hover:border-primary/20 transition-all duration-300 shadow-sm hover:shadow-xl">
-                <div
-                  className={`w-16 h-16 rounded-2xl bg-surface-alt flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${feature.color}`}
+            <motion.article
+              key={index}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="feature-card group"
+              role="listitem"
+              itemScope
+              itemType="https://schema.org/Product"
+            >
+              <div className="relative bg-white/80 rounded-3xl p-8 h-full border-2 border-transparent hover:border-pink-200 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-pink-200/30 backdrop-blur-sm">
+                <figure
+                  className={`w-16 h-16 rounded-2xl ${feature.bgColor} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md`}
+                  aria-hidden="true"
                 >
-                  <feature.icon size={32} strokeWidth={1.5} />
-                </div>
-                <h3 className="font-serif text-xl font-bold text-foreground mb-3">{feature.title}</h3>
-                <p className="text-muted leading-relaxed">{feature.description}</p>
+                  <div className={`${feature.color}`}>
+                    <feature.icon size={32} strokeWidth={1.5} />
+                  </div>
+                </figure>
+
+                <h3
+                  className="font-serif text-xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-3"
+                  itemProp="name"
+                >
+                  {feature.title}
+                </h3>
+                <p
+                  className="text-gray-700 leading-relaxed font-medium"
+                  itemProp="description"
+                >
+                  {feature.description}
+                </p>
+
+                {/* Decorative Line */}
+                <div
+                  className={`absolute bottom-4 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r ${feature.gradient} group-hover:w-16 transition-all duration-300 rounded-full`}
+                ></div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
-        </div>
+        </article>
+
+        {/* Decorative Background Elements */}
+        <div
+          className="absolute left-10 top-1/4 w-20 h-20 bg-pink-300 rounded-full blur-2xl opacity-40"
+          aria-hidden="true"
+        ></div>
+        <div
+          className="absolute right-10 bottom-1/4 w-24 h-24 bg-rose-300 rounded-full blur-2xl opacity-30"
+          aria-hidden="true"
+        ></div>
       </div>
     </section>
-  )
+  );
 }
