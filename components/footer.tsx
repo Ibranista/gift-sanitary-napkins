@@ -34,12 +34,12 @@ export default function Footer() {
               >
                 About Us
               </Link>
-              <Link
+              {/* <Link
                 href="/products"
                 className="block text-gray-700 hover:text-rose-500 transition-all duration-300 hover:translate-x-2 font-medium"
               >
                 Our Products
-              </Link>
+              </Link> */}
             </div>
           </div>
 

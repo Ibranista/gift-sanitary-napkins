@@ -134,7 +134,7 @@ export default function ProductShowcase() {
                   ))}
                 </ul>
 
-                <Link href="/products">
+                <Link href="/about" className="cursor-pointer">
                   <motion.button
                     whileHover={{ scale: 1.05, rotate: 1 }}
                     whileTap={{ scale: 0.98 }}
@@ -153,13 +153,13 @@ export default function ProductShowcase() {
         </div>
 
         <div className="text-center mt-12">
-          <Link href="/products">
+          <Link href="/about">
             <motion.button
               whileHover={{ scale: 1.05, rotate: 1 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-3.5 border-2 border-rose-400 text-rose-500 rounded-full font-semibold hover:bg-gradient-to-r hover:from-rose-400 hover:to-pink-500 hover:text-white transition-all duration-300 inline-flex items-center gap-2 bg-white/80 shadow-lg hover:shadow-pink-200/50"
             >
-              Explore All Products
+              We Have Awesome Products For You
               <Heart
                 size={18}
                 className="group-hover:scale-110 transition-transform"

@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,6 +32,32 @@ const carouselItems = [
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter();
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+  }, [isMobileMenuOpen]);
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (!contactSection) return setIsMobileMenuOpen(false);
+
+    // Calculate offset to avoid the fixed header covering the section.
+    const header = document.querySelector(
+      'header[role="banner"]'
+    ) as HTMLElement | null;
+    const headerHeight = header ? header.getBoundingClientRect().height : 80;
+
+    const sectionTop =
+      contactSection.getBoundingClientRect().top + window.scrollY;
+    const scrollTo = Math.max(sectionTop - headerHeight - 12, 0);
+
+    window.scrollTo({ top: scrollTo, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -79,7 +106,7 @@ export default function HeroSection() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-200 to-rose-200 rounded-full text-rose-600 font-medium text-sm shadow-sm"
             >
               <span className="text-lg">✨</span>
-              Premium Feminine Care
+              Premium Self Care
             </motion.div>
 
             <h1 className="font-serif text-5xl md:text-6xl lg:text-6xl font-bold text-transparent bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text leading-tight text-balance">
@@ -96,7 +123,8 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05, rotate: 1 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-semibold hover:from-rose-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-pink-300 hover:shadow-pink-400 flex items-center gap-2"
+                className="cursor-pointer px-8 py-3.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-semibold hover:from-rose-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-pink-300 hover:shadow-pink-400 flex items-center gap-2"
+                onClick={scrollToContact}
               >
                 Contact Us
                 <span className="text-lg">💌</span>
@@ -104,7 +132,8 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3.5 border-2 border-rose-400 text-rose-500 rounded-full font-semibold hover:bg-rose-400 hover:text-white transition-all duration-300 bg-white/80"
+                className="cursor-pointer px-8 py-3.5 border-2 border-rose-400 text-rose-500 rounded-full font-semibold hover:bg-rose-400 hover:text-white transition-all duration-300 bg-white/80"
+                onClick={() => router.push("/about")}
               >
                 Learn More
               </motion.button>

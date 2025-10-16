@@ -23,7 +23,19 @@ export default function Navigation() {
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
-    if (contactSection) contactSection.scrollIntoView({ behavior: "smooth" });
+    if (!contactSection) return setIsMobileMenuOpen(false);
+
+    // Calculate offset to avoid the fixed header covering the section.
+    const header = document.querySelector(
+      'header[role="banner"]'
+    ) as HTMLElement | null;
+    const headerHeight = header ? header.getBoundingClientRect().height : 80;
+
+    const sectionTop =
+      contactSection.getBoundingClientRect().top + window.scrollY;
+    const scrollTo = Math.max(sectionTop - headerHeight - 12, 0);
+
+    window.scrollTo({ top: scrollTo, behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
 

@@ -57,6 +57,7 @@ export default function ContactSection() {
 
   return (
     <section
+      id="contact"
       ref={sectionRef}
       className="relative py-20 bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100"
       aria-labelledby="contact-heading"
