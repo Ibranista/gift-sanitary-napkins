@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// removed arrow icons — dots will be used for navigation
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MontserratFont } from "@/lib/fonts";
@@ -19,12 +18,12 @@ const carouselItems = [
     description: "Perfect for everyday comfort and protection",
   },
   {
-    image: "/images/product-2.jpg",
+    image: "/images/product-2.png",
     title: "Ultra Thin",
     description: "Discreet protection without compromise",
   },
   {
-    image: "/images/product-3.jpg",
+    image: "/images/product-3.png",
     title: "Night Protection",
     description: "Sleep peacefully with extended coverage",
   },
@@ -46,7 +45,6 @@ export default function HeroSection() {
     const contactSection = document.getElementById("contact");
     if (!contactSection) return setIsMobileMenuOpen(false);
 
-    // Calculate offset to avoid the fixed header covering the section.
     const header = document.querySelector(
       'header[role="banner"]'
     ) as HTMLElement | null;
@@ -81,7 +79,6 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
-  // Interval ref so we can reset the timer when user interacts
   const intervalRef = useRef<number | null>(null);
 
   const startInterval = () => {
@@ -181,40 +178,50 @@ export default function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Right Carousel */}
+          {/* Right Carousel - UPDATED: No blur background, clear images */}
           <motion.div className="hero-image relative overflow-visible">
-            <div className="relative bg-white/80 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-pink-200/50 backdrop-blur-sm border border-pink-100 overflow-hidden">
-              <div className="relative w-full flex items-center justify-center py-6">
+            <div className="relative bg-white/90 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-pink-200/50 backdrop-blur-sm border border-pink-100">
+              <div className="relative w-full flex items-center justify-center">
                 <motion.div
                   key={currentSlide}
                   initial={{ opacity: 0, x: 100 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.5 }}
-                  className="text-center"
+                  className="text-center w-full"
                 >
-                  <div className="relative w-56 h-56 sm:w-64 sm:h-64 mx-auto mb-4 sm:mb-6">
-                    <Image
-                      src={
-                        carouselItems[currentSlide].image || "/placeholder.svg"
-                      }
-                      alt={carouselItems[currentSlide].title}
-                      fill
-                      className="object-contain drop-shadow-2xl"
-                    />
+                  {/* UPDATED: Larger image container without blur background */}
+                  <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-md mx-auto mb-6 h-64 sm:h-80 lg:h-72">
+                    <div className="relative w-full h-full mx-auto rounded-2xl overflow-hidden">
+                      <Image
+                        src={
+                          carouselItems[currentSlide].image ||
+                          "/placeholder.svg"
+                        }
+                        alt={carouselItems[currentSlide].title}
+                        fill
+                        className="object-contain drop-shadow-2xl"
+                        priority={true}
+                        sizes="(max-width: 640px) 320px, (max-width: 768px) 400px, 500px"
+                      />
+                    </div>
                   </div>
-                  <h3 className="font-serif text-2xl font-bold text-transparent bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text mb-2">
-                    {carouselItems[currentSlide].title}
-                  </h3>
-                  <p className="text-gray-700 font-medium">
-                    {carouselItems[currentSlide].description}
-                  </p>
+
+                  {/* UPDATED: Text with better contrast */}
+                  <div className="px-4">
+                    <h3 className="font-poppins text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3">
+                      {carouselItems[currentSlide].title}
+                    </h3>
+                    <p className="text-gray-700 font-medium text-lg sm:text-xl bg-white/80 rounded-xl py-2 px-4 inline-block">
+                      {carouselItems[currentSlide].description}
+                    </p>
+                  </div>
                 </motion.div>
               </div>
 
               {/* Carousel Controls */}
               <div
-                className="flex items-center justify-center gap-3 mt-6 flex-wrap"
+                className="flex items-center justify-center gap-3 mt-8 flex-wrap"
                 role="tablist"
                 aria-label="Carousel slides"
               >
@@ -224,7 +231,6 @@ export default function HeroSection() {
                       key={index}
                       onClick={() => {
                         setCurrentSlide(index);
-                        // reset interval so users have time to read
                         startInterval();
                       }}
                       aria-current={index === currentSlide}
@@ -240,7 +246,7 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Decorative Elements - hide on small screens to avoid overflow */}
+            {/* Decorative Elements */}
             <div className="hidden sm:block absolute -top-4 -right-4 w-24 h-24 bg-pink-300 rounded-full blur-2xl opacity-60 pointer-events-none"></div>
             <div className="hidden sm:block absolute -bottom-4 -left-4 w-32 h-32 bg-rose-300 rounded-full blur-2xl opacity-50 pointer-events-none"></div>
             <div className="hidden sm:block absolute top-1/2 -right-8 w-16 h-16 bg-pink-200 rounded-full blur-xl opacity-70 pointer-events-none"></div>

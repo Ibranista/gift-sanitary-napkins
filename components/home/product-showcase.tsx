@@ -16,7 +16,7 @@ const products = [
     name: "Regular Flow",
     description:
       "Perfect for everyday comfort and protection with our signature softness",
-    image: "/images/product-1.jpg",
+    image: "/images/product-3.png",
     features: ["Ultra-soft cover", "Breathable wings", "8-hour comfort"],
     color: "from-rose-400 to-pink-500",
     bgColor: "bg-rose-50",
@@ -25,7 +25,7 @@ const products = [
     id: 2,
     name: "Ultra Thin",
     description: "Discreet protection that feels like wearing nothing at all",
-    image: "/images/product-2.jpg",
+    image: "/images/product-1.jpg",
     features: ["Super thin design", "Flexible fit", "All-day confidence"],
     color: "from-purple-400 to-pink-500",
     bgColor: "bg-purple-50",
@@ -34,7 +34,7 @@ const products = [
     id: 3,
     name: "Night Protection",
     description: "Sleep peacefully through the night with extended coverage",
-    image: "/images/product-3.jpg",
+    image: "/images/product-2.png",
     features: ["Extra long back", "Maximum absorbency", "12-hour security"],
     color: "from-blue-400 to-cyan-500",
     bgColor: "bg-blue-50",
@@ -90,7 +90,7 @@ export default function ProductShowcase() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product, index) => (
             <motion.div
-              key={product.id}
+              key={index}
               className="product-card group"
               whileHover={{ y: -12, scale: 1.02 }}
               transition={{ duration: 0.3 }}
@@ -105,7 +105,11 @@ export default function ProductShowcase() {
                     src={product.image || "/placeholder.svg"}
                     alt={product.name}
                     fill
-                    className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                    className={`object-contain transition-transform duration-500 ${
+                      product.id === 1
+                        ? "scale-105 p-2 group-hover:scale-110"
+                        : "p-4 group-hover:scale-110"
+                    }`}
                   />
                   {/* Decorative corner */}
                   <div
