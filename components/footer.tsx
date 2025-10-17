@@ -62,7 +62,7 @@ export default function Footer() {
                   <Mail size={16} className="text-white" />
                 </div>
                 <span className="group-hover:text-rose-500 transition-colors">
-                  hello@giftsanitarynapkins.com
+                  hirahsa311@gmail.com
                 </span>
               </div>
               <div className="flex items-center gap-3 text-gray-700 group">

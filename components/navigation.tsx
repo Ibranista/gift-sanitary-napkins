@@ -65,7 +65,7 @@ export default function Navigation() {
           {/* Brand / Logo */}
           <Link
             href="/"
-            className="font-cursive text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-transparent bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text flex items-center gap-2 min-w-0"
+            className="font-cursive text-[16px] sm:text-lg md:text-2xl lg:text-3xl font-bold text-transparent bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text flex items-center gap-2 min-w-0"
             itemScope
             itemType="https://schema.org/Brand"
             aria-label="Gift Sanitary Napkins Home"

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+// removed arrow icons — dots will be used for navigation
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MontserratFont } from "@/lib/fonts";
@@ -81,15 +81,23 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselItems.length);
+  // Interval ref so we can reset the timer when user interacts
+  const intervalRef = useRef<number | null>(null);
+
+  const startInterval = () => {
+    if (intervalRef.current) window.clearInterval(intervalRef.current);
+    intervalRef.current = window.setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselItems.length);
+    }, 4000) as unknown as number;
   };
 
-  const prevSlide = () => {
-    setCurrentSlide(
-      (prev) => (prev - 1 + carouselItems.length) % carouselItems.length
-    );
-  };
+  useEffect(() => {
+    startInterval();
+    return () => {
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carouselItems.length]);
 
   return (
     <section
@@ -127,7 +135,7 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05, rotate: 1 }}
                 whileTap={{ scale: 0.95 }}
-                className="cursor-pointer px-8 py-3.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-semibold hover:from-rose-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-pink-300 hover:shadow-pink-400 flex items-center gap-2"
+                className="w-full sm:w-auto cursor-pointer px-8 py-3.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-semibold hover:from-rose-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-pink-300 hover:shadow-pink-400 flex items-center justify-center gap-2"
                 onClick={scrollToContact}
               >
                 Contact Us
@@ -136,7 +144,7 @@ export default function HeroSection() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="cursor-pointer px-8 py-3.5 border-2 border-rose-400 text-rose-500 rounded-full font-semibold hover:bg-rose-400 hover:text-white transition-all duration-300 bg-white/80"
+                className="w-full sm:w-auto cursor-pointer px-8 py-3.5 border-2 border-rose-400 text-rose-500 rounded-full font-semibold hover:bg-rose-400 hover:text-white transition-all duration-300 bg-white/80 flex items-center justify-center"
                 onClick={() => router.push("/about")}
               >
                 Learn More
@@ -205,22 +213,23 @@ export default function HeroSection() {
               </div>
 
               {/* Carousel Controls */}
-              <div className="flex items-center justify-center gap-4 mt-6 flex-wrap">
-                <motion.button
-                  whileHover={{ scale: 1.1, rotate: -5 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={prevSlide}
-                  className="p-2 rounded-full bg-white shadow-lg shadow-pink-200 hover:bg-gradient-to-r hover:from-rose-400 hover:to-pink-400 hover:text-white transition-all duration-300 border border-pink-200"
-                >
-                  <ChevronLeft size={20} />
-                </motion.button>
-
-                <div className="flex gap-2">
+              <div
+                className="flex items-center justify-center gap-3 mt-6 flex-wrap"
+                role="tablist"
+                aria-label="Carousel slides"
+              >
+                <div className="flex gap-2" role="presentation">
                   {carouselItems.map((_, index) => (
                     <button
                       key={index}
-                      onClick={() => setCurrentSlide(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      onClick={() => {
+                        setCurrentSlide(index);
+                        // reset interval so users have time to read
+                        startInterval();
+                      }}
+                      aria-current={index === currentSlide}
+                      aria-label={`Go to slide ${index + 1}`}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rose-300 ${
                         index === currentSlide
                           ? "bg-gradient-to-r from-rose-500 to-pink-500 w-8 shadow-sm"
                           : "bg-pink-300 hover:bg-pink-400"
@@ -228,15 +237,6 @@ export default function HeroSection() {
                     />
                   ))}
                 </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={nextSlide}
-                  className="p-2 rounded-full bg-white shadow-lg shadow-pink-200 hover:bg-gradient-to-r hover:from-rose-400 hover:to-pink-400 hover:text-white transition-all duration-300 border border-pink-200"
-                >
-                  <ChevronRight size={20} />
-                </motion.button>
               </div>
             </div>
 

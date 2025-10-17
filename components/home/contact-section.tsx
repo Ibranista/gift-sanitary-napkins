@@ -111,10 +111,10 @@ export default function ContactSection() {
                         Email Us
                       </h4>
                       <a
-                        href="mailto:hello@giftsanitarynapkins.com"
+                        href="mailto:hirahsa311@gmail.com"
                         className="text-gray-700 text-sm sm:text-base break-all"
                       >
-                        hello@giftsanitarynapkins.com
+                        hirahsa311@gmail.com
                       </a>
                       <p className="text-xs sm:text-sm text-gray-600 mt-1">
                         We typically reply within 2 hours
