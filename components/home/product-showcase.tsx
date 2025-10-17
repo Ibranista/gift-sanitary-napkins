@@ -78,7 +78,7 @@ export default function ProductShowcase() {
             <Sparkles size={16} />
             Our Collection
           </motion.div>
-          <h2 className="font-serif text-4xl md:text-4xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4 text-balance">
+          <h2 className="font-poppins text-4xl md:text-4xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4 text-balance">
             Find Your Perfect Comfort
           </h2>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed bg-white/50 rounded-2xl p-6 shadow-sm">
@@ -113,7 +113,7 @@ export default function ProductShowcase() {
                   ></div>
                 </div>
 
-                <h3 className="font-serif text-2xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-2">
+                <h3 className="font-poppins text-2xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-2">
                   {product.name}
                 </h3>
                 <p className="text-gray-700 mb-4 leading-relaxed font-medium">

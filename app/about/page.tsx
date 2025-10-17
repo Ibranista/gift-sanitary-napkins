@@ -76,7 +76,7 @@ export default function page() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-6 text-balance"
+              className="font-poppins text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-6 text-balance"
             >
               More Than Just Protection
             </motion.h1>
@@ -106,7 +106,7 @@ export default function page() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text">
+              <h2 className="font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text">
                 Our Beautiful Mission
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed">
@@ -165,7 +165,7 @@ export default function page() {
               <Heart size={16} />
               What We Stand For
             </motion.div>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
+            <h2 className="font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
               Our Core Values
             </h2>
           </div>
@@ -187,7 +187,7 @@ export default function page() {
                   >
                     <value.icon size={32} className="text-white" />
                   </div>
-                  <h3 className="font-serif text-xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-3">
+                  <h3 className="font-poppins text-base sm:text-lg font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-3">
                     {value.title}
                   </h3>
                   <p className="text-gray-700 leading-relaxed">

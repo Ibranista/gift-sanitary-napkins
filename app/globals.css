@@ -42,6 +42,12 @@
 @theme inline {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  /* The actual cursive font is provided by Next's font loader which injects
+     a CSS variable (e.g. --font-cursive) on the document when the
+     variable-class (cedarville.variable) is added to the HTML/body. We
+     don't reassign the variable here; instead we use it where needed with
+     a sensible fallback. */
 
   /* Color System - Soft Pink & Blush Palette */
   --color-primary: #e57373;
@@ -84,6 +90,26 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Utility class to apply the cursive font variable injected by Next's
+   font loader. If the variable isn't present, fall back to a generic
+   cursive font. */
+.font-cursive {
+  font-family: var(--font-cursive, "Cedarville", cursive);
+}
+
+.font-montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Utility for Poppins headings (a modern, geometric sans-serif) */
+.font-poppins {
+  /* Next's Poppins loader sets a CSS variable (see lib/fonts.ts -> cedarville)
+     which we will use as the primary font for headings when available. */
+  font-family: var(--font-cursive, 'Poppins'), 'Poppins', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
 * {
   /* margin: 0;
   padding: 0; */
@@ -111,9 +137,28 @@ h6 {
   line-height: 1.2;
 }
 
+/* Utility for Playfair Display headings with slightly tighter letter-spacing
+   and bolder appearance for titles. This relies on the Playfair Display
+   font being loaded in `app/layout.tsx` via Next's font loader which adds
+   the font to the document; the CSS var --font-serif points to Playfair.
+*/
+.font-playfair {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  /* use bold weight for stronger titles */
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
 /* Removed the problematic @apply border-border line */
 @layer base {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Prevent accidental horizontal overflow on small screens (mobile) */
+html,
+body {
+  overflow-x: hidden;
 }

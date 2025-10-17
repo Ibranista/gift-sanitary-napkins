@@ -24,7 +24,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
+            <h4 className="font-poppins font-semibold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
               Explore More
             </h4>
             <div className="space-y-3">
@@ -45,7 +45,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-semibold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
+            <h4 className="font-poppins font-semibold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
               Let's Connect 💕
             </h4>
             <div className="space-y-4">

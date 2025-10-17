@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { MontserratFont } from "@/lib/fonts";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,10 +94,10 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100"
+      className={`${MontserratFont.className} min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100`}
     >
-      <div className="mx-auto px-4 sm:px-6 lg:px-12 lg:pt-20 lg:pb-12 py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="mx-auto px-4 sm:px-6 lg:px-12 lg:pt-20 lg:pb-12 py-10 font-montserrat">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
           <motion.div className="hero-content space-y-6">
             <motion.div
@@ -109,11 +110,14 @@ export default function HeroSection() {
               Premium Self Care
             </motion.div>
 
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-6xl font-bold text-transparent bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text leading-tight text-balance">
+            <h1
+              className={`${MontserratFont.className} font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text leading-tight text-balance`}
+              style={{ lineHeight: 1.05 }}
+            >
               Let Us Take Care Of You
             </h1>
 
-            <p className="text-lg text-gray-700 leading-relaxed max-w-xl font-medium bg-white/50 rounded-2xl p-6 shadow-sm">
+            <p className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-xl font-medium bg-white/50 rounded-2xl p-5 sm:p-6 shadow-sm">
               Experience unparalleled comfort and protection with our
               eco-friendly sanitary napkins. Designed by women, for women, with
               your health and comfort as our priority.
@@ -139,8 +143,8 @@ export default function HeroSection() {
               </motion.button>
             </div>
 
-            <div className="flex items-center gap-8 pt-8 bg-white/60 rounded-3xl p-6 shadow-sm">
-              <div className="text-center">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-8 pt-6 bg-white/60 rounded-3xl p-4 sm:p-6 shadow-sm">
+              <div className="text-center flex-1">
                 <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text">
                   100%
                 </div>
@@ -148,8 +152,8 @@ export default function HeroSection() {
                   Organic Cotton
                 </div>
               </div>
-              <div className="h-12 w-px bg-gradient-to-b from-pink-300 to-rose-300"></div>
-              <div className="text-center">
+              <div className="hidden sm:block h-12 w-px bg-gradient-to-b from-pink-300 to-rose-300"></div>
+              <div className="text-center flex-1">
                 <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text">
                   24h
                 </div>
@@ -157,8 +161,8 @@ export default function HeroSection() {
                   All-Day Protection
                 </div>
               </div>
-              <div className="h-12 w-px bg-gradient-to-b from-pink-300 to-rose-300"></div>
-              <div className="text-center">
+              <div className="hidden sm:block h-12 w-px bg-gradient-to-b from-pink-300 to-rose-300"></div>
+              <div className="text-center flex-1">
                 <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text">
                   Eco
                 </div>
@@ -170,9 +174,9 @@ export default function HeroSection() {
           </motion.div>
 
           {/* Right Carousel */}
-          <motion.div className="hero-image relative">
-            <div className="relative bg-white/80 rounded-3xl p-8 shadow-2xl shadow-pink-200/50 backdrop-blur-sm border border-pink-100">
-              <div className="relative h-96 flex items-center justify-center">
+          <motion.div className="hero-image relative overflow-visible">
+            <div className="relative bg-white/80 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-pink-200/50 backdrop-blur-sm border border-pink-100 overflow-hidden">
+              <div className="relative w-full flex items-center justify-center py-6">
                 <motion.div
                   key={currentSlide}
                   initial={{ opacity: 0, x: 100 }}
@@ -181,7 +185,7 @@ export default function HeroSection() {
                   transition={{ duration: 0.5 }}
                   className="text-center"
                 >
-                  <div className="relative w-64 h-64 mx-auto mb-6">
+                  <div className="relative w-56 h-56 sm:w-64 sm:h-64 mx-auto mb-4 sm:mb-6">
                     <Image
                       src={
                         carouselItems[currentSlide].image || "/placeholder.svg"
@@ -201,7 +205,7 @@ export default function HeroSection() {
               </div>
 
               {/* Carousel Controls */}
-              <div className="flex items-center justify-center gap-4 mt-6">
+              <div className="flex items-center justify-center gap-4 mt-6 flex-wrap">
                 <motion.button
                   whileHover={{ scale: 1.1, rotate: -5 }}
                   whileTap={{ scale: 0.9 }}
@@ -236,10 +240,10 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Decorative Elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-pink-300 rounded-full blur-2xl opacity-60"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-rose-300 rounded-full blur-2xl opacity-50"></div>
-            <div className="absolute top-1/2 -right-8 w-16 h-16 bg-pink-200 rounded-full blur-xl opacity-70"></div>
+            {/* Decorative Elements - hide on small screens to avoid overflow */}
+            <div className="hidden sm:block absolute -top-4 -right-4 w-24 h-24 bg-pink-300 rounded-full blur-2xl opacity-60 pointer-events-none"></div>
+            <div className="hidden sm:block absolute -bottom-4 -left-4 w-32 h-32 bg-rose-300 rounded-full blur-2xl opacity-50 pointer-events-none"></div>
+            <div className="hidden sm:block absolute top-1/2 -right-8 w-16 h-16 bg-pink-200 rounded-full blur-xl opacity-70 pointer-events-none"></div>
           </motion.div>
         </div>
       </div>

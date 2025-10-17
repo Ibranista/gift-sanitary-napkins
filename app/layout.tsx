@@ -4,6 +4,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
+import { cedarville, MontserratFont } from "@/lib/fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({ subsets: ["latin"] });
@@ -71,7 +72,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${playfair.className}`}>
+      <body
+        className={`${inter.className} ${playfair.className} ${cedarville.className} ${MontserratFont.variable}`}
+      >
         {/* Organization structured data (JSON-LD) */}
         <script
           type="application/ld+json"
@@ -90,7 +93,7 @@ export default function RootLayout({
               contactPoint: [
                 {
                   "@type": "ContactPoint",
-                  telephone: "+1-555-555-5555",
+                  telephone: "+251-911258682",
                   contactType: "customer service",
                 },
               ],

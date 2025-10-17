@@ -52,7 +52,7 @@ export default function Navigation() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       role="banner"
-      className={`mx-auto fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`mx-auto fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-cursive ${
         isScrolled
           ? "bg-gradient-to-r from-pink-50/95 to-rose-50/95 backdrop-blur-md shadow-lg shadow-pink-100/50"
           : "bg-gradient-to-r from-pink-50 to-rose-50"
@@ -65,14 +65,23 @@ export default function Navigation() {
           {/* Brand / Logo */}
           <Link
             href="/"
-            className="font-cursive lg:text-3xl text-sm font-bold text-transparent bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text flex items-center gap-1"
+            className="font-cursive text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-transparent bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text flex items-center gap-2 min-w-0"
             itemScope
             itemType="https://schema.org/Brand"
             aria-label="Gift Sanitary Napkins Home"
           >
-            <Sparkles size={20} className="text-pink-400" />
-            <span itemProp="name">Gift Sanitary Napkins</span>
-            <Heart size={16} className="text-rose-400 fill-rose-400" />
+            {/* Icons use responsive width/height so they scale with text */}
+            <Sparkles
+              className="text-pink-400 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
+              aria-hidden
+            />
+            <span itemProp="name" className="truncate">
+              Gift Sanitary Napkins
+            </span>
+            <Heart
+              className="text-rose-400 w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5"
+              aria-hidden
+            />
           </Link>
 
           {/* Contact Button */}
@@ -88,7 +97,7 @@ export default function Navigation() {
 
           {/* Navigation Menu */}
           <nav
-            className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2"
+            className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2 max-w-[calc(100%-4rem)] overflow-hidden"
             role="navigation"
             aria-label="Main Navigation"
             itemScope

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Heart, Leaf, Shield, Sparkles } from "lucide-react";
+import { cedarville, MontserratFont } from "@/lib/fonts";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -88,14 +89,14 @@ export default function FeaturesSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-200 to-rose-200 rounded-full text-rose-600 font-medium text-sm mb-4 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-200 to-rose-200 rounded-full text-rose-600 font-medium text-sm mb-5 shadow-sm"
           >
             <Sparkles size={16} aria-hidden="true" />
             <span>Our Promise to You</span>
           </motion.div>
           <h2
             id="features-heading"
-            className="font-serif text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4 text-balance"
+            className={`font-poppins text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-6 text-balance`}
             itemProp="slogan"
           >
             Why Choose <span itemProp="brand">Gift Sanitary Napkins</span>?
@@ -136,7 +137,7 @@ export default function FeaturesSection() {
                 </figure>
 
                 <h3
-                  className="font-serif text-xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-3"
+                  className="font-poppins text-xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-3"
                   itemProp="name"
                 >
                   {feature.title}
