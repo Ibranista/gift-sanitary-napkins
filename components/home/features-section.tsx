@@ -124,7 +124,9 @@ export default function FeaturesSection() {
               className="feature-card group"
               role="listitem"
               itemScope
-              itemType="https://schema.org/Product"
+              // These are descriptive feature cards, not individual sellable products.
+              // Use a more generic schema type to avoid requiring `offers` or `aggregateRating`.
+              itemType="https://schema.org/Thing"
             >
               <div className="relative bg-white/80 rounded-3xl p-8 h-full border-2 border-transparent hover:border-pink-200 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-pink-200/30 backdrop-blur-sm">
                 <figure
