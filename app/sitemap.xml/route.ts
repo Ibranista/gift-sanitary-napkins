@@ -1,5 +1,3 @@
-import { products as productList } from "@/lib/products";
-
 export async function GET() {
   const baseUrl = "https://giftsanitarynapkins.com";
   const now = new Date().toISOString();
@@ -8,17 +6,7 @@ export async function GET() {
     { url: "/", priority: "1.0", changefreq: "yearly", lastmod: now },
     { url: "/about", priority: "0.8", changefreq: "monthly", lastmod: now },
   ];
-
-  const productPages = (productList || []).map((p: any) => ({
-    url: `/products/${p.id}-${(p.name || "")
-      .toLowerCase()
-      .replace(/\s+/g, "-")}`,
-    priority: "0.7",
-    changefreq: "monthly",
-    lastmod: now,
-  }));
-
-  const pages = [...staticPages, ...productPages];
+  const pages = [...staticPages];
 
   const urls = pages
     .map(
