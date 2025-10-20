@@ -6,9 +6,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: true,
-  },
-}
+  // Use Next.js image optimization (default). Remove `unoptimized: true` so
+  // Next can serve WebP/AVIF and properly sized images for LCP improvements.
+};
 
-export default nextConfig
+export default nextConfig;

@@ -1,13 +1,12 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { cedarville, MontserratFont } from "@/lib/fonts";
 
-const inter = Inter({ subsets: ["latin"] });
-const playfair = Playfair_Display({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Gift Sanitary Napkins - Comfort & Care",
@@ -39,17 +38,26 @@ export const metadata: Metadata = {
     title: "Gift Sanitary Napkins - Comfort & Care",
     description:
       "Comfortable, protective and eco-conscious sanitary napkins — perfect as gifts and everyday menstrual care.",
-    url: "https://www.giftsanitarynapkins.com/",
+    url: "https://giftsanitarynapkins.com/",
     siteName: "Gift Sanitary Napkins",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://giftsanitarynapkins.com/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Gift Sanitary Napkins - Comfort & Care",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Gift Sanitary Napkins - Comfort & Care",
     description:
       "Comfortable, protective and eco-conscious sanitary napkins — perfect as gifts and everyday menstrual care.",
     creator: "@YourTwitterHandle",
+    images: ["https://giftsanitarynapkins.com/images/og-image.jpg"],
   },
   authors: [
     {
@@ -63,6 +71,9 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
+  alternates: {
+    canonical: "https://giftsanitarynapkins.com/",
+  },
 };
 
 export default function RootLayout({
@@ -73,7 +84,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} ${playfair.className} ${cedarville.className} ${MontserratFont.variable}`}
+        className={`${inter.className} ${cedarville.className} ${MontserratFont.variable}`}
       >
         {/* Organization structured data (JSON-LD) */}
         <script

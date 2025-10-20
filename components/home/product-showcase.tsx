@@ -10,36 +10,8 @@ import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const products = [
-  {
-    id: 1,
-    name: "Regular Flow",
-    description:
-      "Perfect for everyday comfort and protection with our signature softness",
-    image: "/images/product-3.png",
-    features: ["Ultra-soft cover", "Breathable wings", "8-hour comfort"],
-    color: "from-rose-400 to-pink-500",
-    bgColor: "bg-rose-50",
-  },
-  {
-    id: 2,
-    name: "Ultra Thin",
-    description: "Discreet protection that feels like wearing nothing at all",
-    image: "/images/product-1.jpg",
-    features: ["Super thin design", "Flexible fit", "All-day confidence"],
-    color: "from-purple-400 to-pink-500",
-    bgColor: "bg-purple-50",
-  },
-  {
-    id: 3,
-    name: "Night Protection",
-    description: "Sleep peacefully through the night with extended coverage",
-    image: "/images/product-2.png",
-    features: ["Extra long back", "Maximum absorbency", "12-hour security"],
-    color: "from-blue-400 to-cyan-500",
-    bgColor: "bg-blue-50",
-  },
-];
+// products are imported from server-safe `lib/products.ts`
+import { products } from "@/lib/products";
 
 export default function ProductShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -67,6 +39,34 @@ export default function ProductShowcase() {
       ref={sectionRef}
       className="py-20 bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100"
     >
+      {/* Product JSON-LD for better indexing */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: products.map((p, idx) => ({
+              "@type": "ListItem",
+              position: idx + 1,
+              item: {
+                "@type": "Product",
+                name: p.name,
+                description: p.description,
+                image: `https://giftsanitarynapkins.com${p.image}`,
+                sku: `GSN-${p.id}`,
+                brand: { "@type": "Brand", name: "Gift Sanitary Napkins" },
+                offers: {
+                  "@type": "Offer",
+                  priceCurrency: "USD",
+                  price: "0.00",
+                  availability: "https://schema.org/InStock",
+                },
+              },
+            })),
+          }),
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <motion.div
