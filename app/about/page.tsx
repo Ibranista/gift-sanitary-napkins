@@ -1,303 +1,184 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Heart, Leaf, Users, Sparkles, Target, Award } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
+import { Award, Heart, Leaf, MapPin, Target, Users } from "lucide-react";
+import SectionHeading, { Eyebrow } from "@/components/section-heading";
+import Reveal from "@/components/reveal";
+import CtaBand from "@/components/cta-band";
+import { cn } from "@/lib/utils";
 
-export default function page() {
-  const values = [
-    {
-      icon: Heart,
-      title: "Compassionate Care",
-      description:
-        "We believe every woman deserves products that make her feel comfortable, confident, and cared for during her menstrual cycle.",
-      color: "from-rose-400 to-pink-500",
-    },
-    {
-      icon: Leaf,
-      title: "Eco-Conscious",
-      description:
-        "Our commitment to sustainability means using organic, biodegradable materials that are gentle on both your body and the planet.",
-      color: "from-emerald-400 to-teal-500",
-    },
-    {
-      icon: Users,
-      title: "Community First",
-      description:
-        "We're building a supportive community where women can share experiences, ask questions, and feel empowered together.",
-      color: "from-purple-400 to-pink-500",
-    },
-    {
-      icon: Target,
-      title: "Innovation Driven",
-      description:
-        "Constantly researching and developing better solutions for feminine hygiene that combine comfort, protection, and sustainability.",
-      color: "from-blue-400 to-cyan-500",
-    },
-  ];
+export const metadata: Metadata = {
+  title: "About — Gift Sanitary Napkins",
+  description:
+    "Learn why Gift Sanitary Napkins focuses on comfort, sustainability, and community. Our mission is to provide safe, organic feminine care that empowers women.",
+  keywords: [
+    "about",
+    "gift",
+    "sanitary napkins",
+    "organic pads",
+    "feminine hygiene",
+    "sustainability",
+  ],
+  alternates: {
+    canonical: "https://giftsanitarynapkins.com/about",
+  },
+};
 
-  const team = [
-    {
-      name: "Sarah Chen",
-      role: "Founder & CEO",
-      image: "/team/sarah.jpg",
-      bio: "After struggling to find comfortable, eco-friendly feminine care products, Sarah founded Belle to create the solutions she wished existed.",
-    },
-    {
-      name: "Dr. Maya Rodriguez",
-      role: "Chief Medical Officer",
-      image: "/team/maya.jpg",
-      bio: "Board-certified gynecologist with 15+ years experience, ensuring our products meet the highest health and safety standards.",
-    },
-    {
-      name: "Emily Thompson",
-      role: "Product Innovation Lead",
-      image: "/team/emily.jpg",
-      bio: "Materials scientist passionate about developing sustainable alternatives that don't compromise on comfort or performance.",
-    },
-  ];
+const values = [
+  {
+    icon: Heart,
+    title: "Compassionate Care",
+    description:
+      "We believe every woman deserves products that make her feel comfortable, confident, and cared for during her menstrual cycle.",
+  },
+  {
+    icon: Leaf,
+    title: "Eco-Conscious",
+    description:
+      "Our commitment to sustainability means using organic, biodegradable materials that are gentle on both your body and the planet.",
+  },
+  {
+    icon: Users,
+    title: "Community First",
+    description:
+      "We're building a supportive community where women can share experiences, ask questions, and feel empowered together.",
+  },
+  {
+    icon: Target,
+    title: "Innovation Driven",
+    description:
+      "Constantly researching and developing better solutions for feminine hygiene that combine comfort, protection, and sustainability.",
+  },
+];
 
+export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100">
-      {/* Hero Section */}
-      <section className="pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-200 to-rose-200 rounded-full text-rose-600 font-medium text-sm mb-6 shadow-sm"
-            >
-              <Sparkles size={16} />
-              Our Story
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="font-poppins text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-6 text-balance"
-            >
-              More Than Just Protection
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed bg-white/50 rounded-2xl p-6 shadow-sm"
-            >
-              At Gift Sanitary Napkins, we're redefining feminine care with
-              products that celebrate womanhood, prioritize your comfort, and
-              protect our beautiful planet. Because you deserve to feel
-              beautiful, confident, and cared for every day of the month. 🌸
-            </motion.p>
-          </div>
+    <>
+      <section
+        aria-labelledby="about-heading"
+        className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-20"
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_50%_at_50%_0%,color-mix(in_oklab,var(--primary)_12%,transparent),transparent_70%)]"
+        />
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+          <Eyebrow>Our story</Eyebrow>
+          <h1
+            id="about-heading"
+            className="mt-6 text-4xl font-semibold leading-[1.08] text-foreground sm:text-6xl"
+          >
+            More than just <span className="italic text-primary">protection</span>
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            At Gift Sanitary Napkins, we&apos;re redefining feminine care with
+            products that celebrate womanhood, prioritize your comfort, and
+            protect our planet — so you feel confident and cared for every day
+            of the month.
+          </p>
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-6"
+      <section aria-labelledby="mission-heading" className="pb-20 sm:pb-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+          <Reveal className="relative order-last lg:order-first">
+            <div className="relative mx-auto aspect-square max-w-md overflow-hidden rounded-[2.5rem] border border-border bg-rose-soft">
+              <div
+                aria-hidden="true"
+                className="absolute inset-y-0 left-1/2 w-4 -translate-x-1/2 bg-navy/10 dark:bg-white/5"
+              />
+              <Image
+                src="/images/gift-packs-cutout.png"
+                alt="A woman holding a pack of Gift sanitary napkins next to a stack of packs"
+                fill
+                sizes="(min-width: 1024px) 448px, 90vw"
+                className="object-contain p-6"
+              />
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <Eyebrow>Our mission</Eyebrow>
+            <h2
+              id="mission-heading"
+              className="mt-5 text-3xl font-semibold text-foreground sm:text-4xl"
             >
-              <h2 className="font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text">
-                Our Beautiful Mission
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              Comfort shouldn&apos;t be a compromise
+            </h2>
+            <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted-foreground">
+              <p>
                 We started Gift Sanitary Napkins with a simple but powerful
                 vision: to create feminine care products that make women feel
-                empowered, comfortable, and beautiful during their menstrual
+                empowered, comfortable, and confident during their menstrual
                 cycle.
               </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p>
                 Too many women settle for products that are uncomfortable,
                 irritating, or harmful to the environment. We believe you
-                shouldn't have to choose between your comfort and the planet's
-                health.
+                shouldn&apos;t have to choose between your comfort and the
+                planet&apos;s health.
               </p>
-              <div className="flex items-center gap-4 pt-4">
-                <Award className="text-rose-500" size={32} />
-                <span className="text-gray-700 font-semibold">
-                  Certified Organic & Dermatologically Tested
-                </span>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="bg-white/80 rounded-3xl p-8 shadow-xl backdrop-blur-sm border border-pink-100">
-                <div className="aspect-square relative rounded-2xl overflow-hidden">
-                  <Image
-                    src="/images/mission.jpg"
-                    alt="Our mission - empowering women through comfortable, sustainable feminine care"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-pink-300 rounded-full blur-2xl opacity-50"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-rose-300 rounded-full blur-2xl opacity-30"></div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-20 bg-white/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-200 to-rose-200 rounded-full text-rose-600 font-medium text-sm mb-4 shadow-sm"
-            >
-              <Heart size={16} />
-              What We Stand For
-            </motion.div>
-            <h2 className="font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
-              Our Core Values
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="group"
-              >
-                <div className="bg-white/80 rounded-3xl p-6 h-full border-2 border-transparent hover:border-pink-200 transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm">
-                  <div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${value.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md`}
-                  >
-                    <value.icon size={32} className="text-white" />
-                  </div>
-                  <h3 className="font-poppins text-base sm:text-lg font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      {/* <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-200 to-rose-200 rounded-full text-rose-600 font-medium text-sm mb-4 shadow-sm"
-            >
-              <Users size={16} />
-              Meet Our Family
-            </motion.div>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
-              The Beautiful Minds Behind Belle
-            </h2>
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
-              Our diverse team of passionate women is dedicated to creating
-              products we're proud to share with our own sisters, mothers, and
-              friends.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="group"
-              >
-                <div className="bg-white/80 rounded-3xl p-6 h-full border-2 border-transparent hover:border-pink-200 transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm text-center">
-                  <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <Image
-                      src={member.image || "/placeholder.svg"}
-                      alt={member.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-rose-500 font-semibold mb-4">
-                    {member.role}
-                  </p>
-                  <p className="text-gray-700 leading-relaxed">{member.bio}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-      {/* CTA Section */}
-      {/* <section className="py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-r from-rose-500 to-pink-500 rounded-3xl p-12 shadow-2xl"
-          >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
-              Join Our Beautiful Community
-            </h2>
-            <p className="text-white/90 text-lg mb-8 leading-relaxed">
-              Ready to experience the Belle difference? Discover products
-              designed with love, care, and your comfort in mind.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05, rotate: 1 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-3.5 bg-white text-rose-500 rounded-full font-semibold hover:bg-pink-50 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
-              >
-                Shop Our Collection
-                <Heart size={18} className="fill-rose-500" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-3.5 border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-rose-500 transition-all duration-300"
-              >
-                Contact Us
-              </motion.button>
             </div>
-          </motion.div>
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+              <li className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4">
+                <Award className="size-5 shrink-0 text-primary" aria-hidden="true" />
+                <span className="text-sm font-semibold text-foreground">
+                  Certified organic & dermatologically tested
+                </span>
+              </li>
+              <li className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4">
+                <MapPin className="size-5 shrink-0 text-primary" aria-hidden="true" />
+                <span className="text-sm font-semibold text-foreground">
+                  Proudly made in Ethiopia
+                </span>
+              </li>
+            </ul>
+          </Reveal>
         </div>
-      </section> */}
+      </section>
 
-      {/* Decorative elements */}
-      <div className="absolute left-5 top-1/4 w-20 h-20 bg-pink-300 rounded-full blur-2xl opacity-40"></div>
-      <div className="absolute right-10 top-1/2 w-24 h-24 bg-rose-300 rounded-full blur-2xl opacity-30"></div>
-      <div className="absolute left-1/3 bottom-1/4 w-16 h-16 bg-purple-300 rounded-full blur-2xl opacity-20"></div>
-    </div>
+      <section
+        aria-labelledby="values-heading"
+        className="border-y border-border bg-card py-20 sm:py-24"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            id="values-heading"
+            eyebrow="What we stand for"
+            title="Our core values"
+          />
+          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {values.map((value, index) => (
+              <li key={value.title}>
+                <Reveal delay={index * 0.08} className="h-full">
+                  <article className="h-full rounded-2xl border border-border bg-background p-7">
+                    <span
+                      className={cn(
+                        "flex size-12 items-center justify-center rounded-xl",
+                        index % 2 === 0
+                          ? "bg-rose-soft text-rose-soft-foreground"
+                          : "bg-navy-soft text-navy-soft-foreground"
+                      )}
+                      aria-hidden="true"
+                    >
+                      <value.icon className="size-6" strokeWidth={1.75} />
+                    </span>
+                    <h3 className="mt-6 text-xl font-semibold text-foreground">
+                      {value.title}
+                    </h3>
+                    <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">
+                      {value.description}
+                    </p>
+                  </article>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <div className="py-20 sm:py-24">
+        <CtaBand />
+      </div>
+    </>
   );
 }

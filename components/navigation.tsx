@@ -1,190 +1,137 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Menu, X, Heart, Sparkles } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Logo from "@/components/logo";
+import ThemeToggle from "@/components/theme-toggle";
+import { navLinks } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 export default function Navigation() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Handle navbar background on scroll
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 12);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent background scroll when mobile menu is open
+  // Lock page scroll while the mobile menu is open.
   useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
-  }, [isMobileMenuOpen]);
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById("contact");
-    if (!contactSection) return setIsMobileMenuOpen(false);
+  useEffect(() => setIsMenuOpen(false), [pathname]);
 
-    // Calculate offset to avoid the fixed header covering the section.
-    const header = document.querySelector(
-      'header[role="banner"]'
-    ) as HTMLElement | null;
-    const headerHeight = header ? header.getBoundingClientRect().height : 80;
-
-    const sectionTop =
-      contactSection.getBoundingClientRect().top + window.scrollY;
-    const scrollTo = Math.max(sectionTop - headerHeight - 12, 0);
-
-    window.scrollTo({ top: scrollTo, behavior: "smooth" });
-    setIsMobileMenuOpen(false);
-  };
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    // { href: "/products", label: "Products" },
-    // { href: "/testimonials", label: "Testimonials" },
-    // { href: "/faqs", label: "FAQs" },
-  ];
+  const isActive = (href: string) =>
+    href === "/" || href === "/about" ? pathname === href : false;
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+    <header
       role="banner"
-      className={`mx-auto fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-cursive ${
-        isScrolled
-          ? "bg-gradient-to-r from-pink-50/95 to-rose-50/95 backdrop-blur-md shadow-lg shadow-pink-100/50"
-          : "bg-gradient-to-r from-pink-50 to-rose-50"
-      }`}
-      itemScope
-      itemType="https://schema.org/WPHeader"
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300",
+        isScrolled || isMenuOpen
+          ? "border-b border-border bg-background/85 shadow-[0_8px_30px_-12px_rgba(22,26,51,0.12)] backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
+      )}
     >
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <section className="flex items-center justify-between h-20 lg:px-5">
-          {/* Brand / Logo */}
-          <Link
-            href="/"
-            className="font-cursive text-[16px] sm:text-lg md:text-2xl lg:text-3xl font-bold text-transparent bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text flex items-center gap-2 min-w-0"
-            itemScope
-            itemType="https://schema.org/Brand"
-            aria-label="Gift Sanitary Napkins Home"
-          >
-            {/* Icons use responsive width/height so they scale with text */}
-            <Sparkles
-              className="text-pink-400 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
-              aria-hidden
-            />
-            <span itemProp="name" className="truncate">
-              Gift Sanitary Napkins
-            </span>
-            <Heart
-              className="text-rose-400 w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5"
-              aria-hidden
-            />
-          </Link>
+      <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <Logo />
 
-          {/* Contact Button */}
-          <motion.button
-            onClick={scrollToContact}
-            whileHover={{ scale: 1.05, rotate: 1 }}
-            whileTap={{ scale: 0.95 }}
-            className="cursor-pointer hidden md:block px-6 py-2.5 bg-rose-400 text-white rounded-full font-medium hover:from-rose-500 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-pink-200 hover:shadow-pink-300"
-            aria-label="Get in touch with Gift Sanitary Napkins"
-          >
-            Get in Touch 💕
-          </motion.button>
-
-          {/* Navigation Menu */}
-          <nav
-            className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2 max-w-[calc(100%-4rem)] overflow-hidden"
-            role="navigation"
-            aria-label="Main Navigation"
-            itemScope
-            itemType="https://schema.org/SiteNavigationElement"
-          >
-            <ul className="flex items-center gap-8">
-              {navLinks.map((link, index) => (
-                <motion.li
-                  key={link.href}
-                  whileHover={{ y: -2 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    href={link.href}
-                    className="text-gray-700 hover:text-rose-500 transition-all duration-300 font-medium relative group"
-                    itemProp="url"
-                    aria-label={`Navigate to ${link.label} page`}
-                  >
-                    <span itemProp="name">{link.label}</span>
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-rose-500 hover:bg-pink-50 rounded-full transition-colors duration-200"
-            aria-label="Toggle mobile navigation menu"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </section>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
-        <motion.nav
-          id="mobile-menu"
-          role="navigation"
-          aria-label="Mobile Navigation Menu"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-gradient-to-b from-pink-50 to-rose-50 border-t border-pink-200 max-h-[calc(100vh-80px)] overflow-y-auto"
-          itemScope
-          itemType="https://schema.org/SiteNavigationElement"
-        >
-          <ul className="px-4 py-6 space-y-4">
-            {navLinks.map((link, index) => (
-              <motion.li
-                key={link.href}
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: index * 0.1 }}
-              >
+        <nav aria-label="Main navigation" className="hidden md:block">
+          <ul className="flex items-center gap-1 rounded-full border border-border bg-card/70 p-1 backdrop-blur">
+            {navLinks.map((link) => (
+              <li key={link.href}>
                 <Link
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-3 px-4 text-gray-700 hover:text-rose-500 hover:bg-white/50 rounded-xl transition-all duration-300 font-medium border border-transparent hover:border-pink-200"
-                  itemProp="url"
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={cn(
+                    "rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                    isActive(link.href)
+                      ? "bg-navy text-navy-foreground dark:bg-navy-soft dark:text-navy-soft-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
                 >
-                  <span itemProp="name">{link.label}</span>
+                  {link.label}
                 </Link>
-              </motion.li>
+              </li>
             ))}
-            <motion.li
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: navLinks.length * 0.1 }}
-              className="pt-4"
-            >
-              <motion.button
-                onClick={scrollToContact}
-                className="w-full px-6 py-3 bg-gradient-to-r from-rose-400 to-pink-500 text-white rounded-full font-medium hover:from-rose-500 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-pink-200"
-                aria-label="Get in touch with Gift Sanitary Napkins"
-              >
-                Get in Touch 💕
-              </motion.button>
-            </motion.li>
           </ul>
-        </motion.nav>
-      )}
-    </motion.header>
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Link
+            href="/#contact"
+            className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary-hover md:inline-flex"
+          >
+            Get in touch
+          </Link>
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-border bg-card text-foreground md:hidden"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.nav
+            id="mobile-menu"
+            aria-label="Mobile navigation"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="overflow-hidden border-t border-border bg-background md:hidden"
+          >
+            <ul className="space-y-1 px-4 py-4">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    aria-current={isActive(link.href) ? "page" : undefined}
+                    className={cn(
+                      "block rounded-xl px-4 py-3 text-base font-medium transition-colors",
+                      isActive(link.href)
+                        ? "bg-muted text-foreground"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-3">
+                <Link
+                  href="/#contact"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground"
+                >
+                  Get in touch
+                </Link>
+              </li>
+            </ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }

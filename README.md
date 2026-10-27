@@ -11,9 +11,10 @@ A small Next.js informational landing site for Gift Sanitary Napkins. The site h
 
 ## Features
 
-- Hero section with carousel/visuals
-- Features and product showcase sections
-- Contact form section (static front-end contact UI)
+- Brand logo based on the "Gift" packaging wordmark, used as the favicon too
+- Light and dark mode (light by default) with a toggle in the header
+- Hero, features, product showcase and call-to-action sections
+- Contact form that opens the visitor's email app with the message pre-filled
 - SEO-friendly metadata and sitemap
 - Image and static asset hosting via the `public/` folder
 
@@ -21,8 +22,10 @@ A small Next.js informational landing site for Gift Sanitary Napkins. The site h
 
 - Next.js (App Router)
 - React + TypeScript
-- Tailwind CSS for styling
-- Framer Motion / GSAP used for animations
+- Tailwind CSS v4 with brand colour tokens in `app/globals.css`
+- `next-themes` for light/dark mode
+- Framer Motion for scroll-reveal animations
+- Fonts via `next/font`: Fraunces (headings), Plus Jakarta Sans (body), Courgette (logo lockup)
 
 ## Important files
 
@@ -33,6 +36,9 @@ A small Next.js informational landing site for Gift Sanitary Napkins. The site h
 - `components/navigation.tsx` — top navigation
 - `components/footer.tsx` — footer component
 - `components/home/*` — hero, features, product and contact sections
+- `components/logo.tsx`, `components/theme-toggle.tsx` — logo lockup and dark-mode toggle
+- `lib/site.ts` — contact details and navigation links
+- `public/logo.svg` — "Gift" badge logo; `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png` — favicons
 - `lib/products.ts` — product data used by the product showcase
 - `public/` — static assets (images, verification files)
 

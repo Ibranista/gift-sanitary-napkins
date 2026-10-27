@@ -1,98 +1,79 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, Heart, Sparkles } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import Logo from "@/components/logo";
+import { navLinks, site } from "@/lib/site";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 border-t border-pink-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Company Info */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles size={20} className="text-pink-400" />
-              <h3 className="font-serif text-2xl font-bold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text">
-                Gift Sanitary Napkins
-              </h3>
-              <Heart size={16} className="text-rose-400 fill-rose-400" />
-            </div>
-            <p className="text-gray-700 leading-relaxed mb-4 bg-white/50 rounded-2xl p-4 shadow-sm">
-              Providing beautiful comfort, gentle care, and radiant confidence
-              to women everywhere with our premium feminine products. Because
-              every woman deserves to feel beautiful. 🌸
+    <footer className="border-t border-border bg-card">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1.2fr]">
+          <div className="max-w-sm">
+            <Logo />
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              Soft, breathable and dependable sanitary napkins — made in
+              Ethiopia to keep you comfortable and confident every day of the
+              month.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="font-poppins font-semibold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
-              Explore More
-            </h4>
-            <div className="space-y-3">
-              <Link
-                href="/about"
-                className="block text-gray-700 hover:text-rose-500 transition-all duration-300 hover:translate-x-2 font-medium"
-              >
-                About Us
-              </Link>
-              {/* Products page removed (no /products route) */}
-            </div>
+            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-foreground">
+              Explore
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
-            <h4 className="font-poppins font-semibold text-transparent bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text mb-4">
-              Let's Connect 💕
-            </h4>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 text-gray-700 group">
-                <div className="p-2 bg-gradient-to-r from-rose-400 to-pink-400 rounded-full shadow-sm group-hover:scale-110 transition-transform">
-                  <Phone size={16} className="text-white" />
-                </div>
-                <span className="group-hover:text-rose-500 transition-colors">
-                  +251 911-258682
-                </span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700 group">
-                <div className="p-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-sm group-hover:scale-110 transition-transform">
-                  <Mail size={16} className="text-white" />
-                </div>
-                <span className="group-hover:text-rose-500 transition-colors">
-                  hirahsa311@gmail.com
-                </span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700 group">
-                <div className="p-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full shadow-sm group-hover:scale-110 transition-transform">
-                  <MapPin size={16} className="text-white" />
-                </div>
-                <span className="group-hover:text-rose-500 transition-colors">
-                  Addis Ababa, Ethiopia
-                </span>
-              </div>
-            </div>
+            <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-foreground">
+              Contact
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+              <li>
+                <a
+                  href={site.phoneHref}
+                  className="inline-flex items-center gap-3 transition-colors hover:text-primary"
+                >
+                  <Phone className="size-4 text-primary" aria-hidden="true" />
+                  {site.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="inline-flex items-center gap-3 break-all transition-colors hover:text-primary"
+                >
+                  <Mail className="size-4 shrink-0 text-primary" aria-hidden="true" />
+                  {site.email}
+                </a>
+              </li>
+              <li className="inline-flex items-center gap-3">
+                <MapPin className="size-4 text-primary" aria-hidden="true" />
+                {site.location}
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-pink-200 text-center">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-gray-700 font-medium">
-              © 2025 Gift Sanitary Napkins.
-            </p>
-            <div className="flex items-center gap-4 text-sm text-gray-600">
-              <span className="hover:text-rose-500 transition-colors cursor-pointer">
-                Privacy Policy
-              </span>
-              <span className="w-1 h-1 bg-pink-300 rounded-full"></span>
-              <span className="hover:text-rose-500 transition-colors cursor-pointer">
-                Terms of Service
-              </span>
-            </div>
-          </div>
+        <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {year} {site.name}. All rights reserved.
+          </p>
+          <p>Made with care in Addis Ababa.</p>
         </div>
-
-        {/* Decorative elements */}
-        <div className="absolute left-10 bottom-10 w-16 h-16 bg-pink-300 rounded-full blur-2xl opacity-30"></div>
-        <div className="absolute right-10 bottom-20 w-20 h-20 bg-rose-300 rounded-full blur-2xl opacity-20"></div>
       </div>
     </footer>
   );

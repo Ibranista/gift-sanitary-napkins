@@ -1,14 +1,13 @@
 import type React from "react";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import { cedarville, MontserratFont } from "@/lib/fonts";
-
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+import { ThemeProvider } from "@/components/theme-provider";
+import { courgette, fraunces, jakarta } from "@/lib/fonts";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://giftsanitarynapkins.com"),
   title: "Gift Sanitary Napkins - Comfort & Care",
   description:
     "Experience comfort, protection, and eco-friendly care with Gift Sanitary Napkins",
@@ -33,7 +32,6 @@ export const metadata: Metadata = {
     "gift for her",
     "care packages",
   ],
-  generator: "v0.app",
   openGraph: {
     title: "Gift Sanitary Napkins - Comfort & Care",
     description:
@@ -66,14 +64,18 @@ export const metadata: Metadata = {
     },
   ],
   applicationName: "Gift Sanitary Napkins",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
+  // Favicons come from the file conventions in app/: icon.svg, favicon.ico
+  // and apple-icon.png.
   alternates: {
     canonical: "https://giftsanitarynapkins.com/",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fcfafb" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0e22" },
+  ],
 };
 
 export default function RootLayout({
@@ -82,10 +84,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} ${cedarville.className} ${MontserratFont.variable}`}
-      >
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${fraunces.variable} ${jakarta.variable} ${courgette.variable}`}
+    >
+      <body className="min-h-dvh antialiased">
         {/* Organization structured data (JSON-LD) */}
         <script
           type="application/ld+json"
@@ -95,7 +99,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Gift Sanitary Napkins",
               url: "https://giftsanitarynapkins.com",
-              logo: "https://giftsanitarynapkins.com/favicon.ico",
+              logo: "https://giftsanitarynapkins.com/logo-512.png",
               sameAs: [
                 "https://www.facebook.com/giftsanitarynapkins",
                 "https://www.instagram.com/giftsanitarynapkins",
@@ -111,9 +115,16 @@ export default function RootLayout({
             }),
           }}
         />
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <Navigation />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
